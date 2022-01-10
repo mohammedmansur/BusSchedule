@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Log/Login.dart';
+import 'Home/Home.dart';
 
 class Routing extends StatelessWidget {
   const Routing({Key? key}) : super(key: key);
@@ -9,7 +10,8 @@ class Routing extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const HomeScreen(),
+        '/LoginPage': (context) => const LoginPage(),
       },
     );
   }

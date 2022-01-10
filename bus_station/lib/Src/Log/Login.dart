@@ -145,7 +145,17 @@ class _LoginPageState extends State<LoginPage> {
                     height: 30,
                   ),
                   MaterialButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      setState(() {
+                        name = _userNameController.value.text;
+                        password = _passwordController.value.text;
+                      });
+                      name = name.trim(); //remove spaces
+                      name = name.toLowerCase(); //convert to lowercase
+                      await Provider.of<AuthService>(context, listen: false)
+                          .registerWithEmailAndPassword(name, password!);
+                      Navigator.pop(context); //pop the current screen
+                    },
                     height: 45,
                     color: Colors.blue,
                     child: const Text(

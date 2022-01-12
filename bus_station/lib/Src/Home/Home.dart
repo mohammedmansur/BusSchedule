@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'general_user.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,9 +16,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _formGlobalKey = GlobalKey<FormState>();
   final TextEditingController _chatController = TextEditingController();
+  final TextEditingController _editingController = TextEditingController();
+  String name = 'Write your name...';
+  String messege = "Write message...";
+  String pro = 'unknown';
   @override
   Widget build(BuildContext context) {
-    int id = 0;
     var _authProvider = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.black,
         elevation: 0,
         shadowColor: Colors.transparent,
-        title: const Text('Chat Box'),
+        title: Text(pro),
         centerTitle: true,
         actions: [
           CircleAvatar(
@@ -94,6 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontSize: 16,
                                         ),
                                       ),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
                                       messages[index].date == null
                                           ? Container()
                                           : Text(
@@ -129,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _chatController,
                       decoration: InputDecoration(
-                          hintText: "Write message...",
+                          hintText: name,
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none),
                     ),
@@ -139,13 +146,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   FloatingActionButton(
                     onPressed: () async {
-                      await FirebaseFirestore.instance.collection('1234').add({
-                        'id': id.toString(),
-                        'chat': _chatController.value.text,
-                        'Time': Timestamp.now(),
+                      setState(() async {
+                        if (name == 'Write your name...') {
+                          pro = _chatController.value.text;
+                          _chatController.clear();
+                          name = messege;
+                        } else {
+                          await FirebaseFirestore.instance
+                              .collection('1234')
+                              .add({
+                            'chat': _chatController.value.text,
+                            'Time': Timestamp.now(),
+                          });
+                          _chatController.clear();
+                        }
                       });
-                      id++;
-                      _chatController.clear();
+
                       //     .collection('users')
                       //     .add({
                       //   'name': "wha",
@@ -169,4 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 }

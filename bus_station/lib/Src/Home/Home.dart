@@ -77,45 +77,49 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                    child: Container(
+                                Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: Colors.grey,
                                   ),
-                                  padding: EdgeInsets.all(10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        messages[index].chat ?? 'no chat',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.clip,
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          fontSize: 16,
+                                  padding: const EdgeInsets.only(
+                                      bottom: 7, top: 7, right: 10, left: 10),
+                                  child: Flexible(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          messages[index].chat ?? 'no chat',
+                                          overflow: TextOverflow.clip,
+                                          softWrap: true,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      messages[index].date == null
-                                          ? Container()
-                                          : Text(
-                                              messages[index]
-                                                  .date!
-                                                  .toDate()
-                                                  .minute
-                                                  .toString(),
-                                              style: TextStyle(
-                                                fontSize: 10,
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        messages[index].date == null
+                                            ? Container()
+                                            : Text(
+                                                messages[index]
+                                                    .date!
+                                                    .toDate()
+                                                    .minute
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                ),
                                               ),
-                                            ),
-                                    ],
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(Icons.delete),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                )),
+                                ),
                               ],
                             ),
                           ),
@@ -141,26 +145,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           border: InputBorder.none),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   FloatingActionButton(
                     onPressed: () async {
-                      setState(() async {
-                        if (name == 'Write your name...') {
-                          pro = _chatController.value.text;
-                          _chatController.clear();
-                          name = messege;
-                        } else {
-                          await FirebaseFirestore.instance
-                              .collection('1234')
-                              .add({
-                            'chat': _chatController.value.text,
-                            'Time': Timestamp.now(),
-                          });
-                          _chatController.clear();
-                        }
-                      });
+                      if (name == 'Write your name...') {
+                        pro = _chatController.value.text;
+                        _chatController.clear();
+                        name = messege;
+                        RefreshLocalizations.delegate;
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('1234')
+                            .add({
+                          'chat': _chatController.value.text,
+                          'Time': Timestamp.now(),
+                        });
+                        _chatController.clear();
+                      }
 
                       //     .collection('users')
                       //     .add({
@@ -185,7 +188,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
 }

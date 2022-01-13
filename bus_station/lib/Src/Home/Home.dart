@@ -1,5 +1,6 @@
 import 'package:bus_station/Src/Service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
@@ -69,60 +70,84 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: EdgeInsets.only(top: 5, bottom: 5),
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Container(
-                          padding: const EdgeInsets.only(
-                              left: 14, right: 5, top: 5, bottom: 5),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.only(
-                                      bottom: 7, top: 7, right: 10, left: 10),
-                                  child: Flexible(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          messages[index].chat ?? 'no chat',
-                                          overflow: TextOverflow.clip,
-                                          softWrap: true,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        messages[index].date == null
-                                            ? Container()
-                                            : Text(
-                                                messages[index]
-                                                    .date!
-                                                    .toDate()
-                                                    .minute
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                ),
-                                              ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(Icons.delete),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(
+                                  left: 5, right: 5, bottom: 0, top: 8),
+
+                              //width: 300,
+
+                              child: Text(
+                                pro,
+                                style: TextStyle(
+                                  fontSize: 14,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                            Container(
+                              padding: const EdgeInsets.only(
+                                  left: 14, right: 5, top: 5, bottom: 5),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.grey,
+                                      ),
+                                      padding: const EdgeInsets.only(
+                                          bottom: 7,
+                                          top: 7,
+                                          right: 10,
+                                          left: 10),
+                                      child: Flexible(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              messages[index].chat ?? 'no chat',
+                                              overflow: TextOverflow.clip,
+                                              softWrap: true,
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            messages[index].date == null
+                                                ? Container()
+                                                : Text(
+                                                    messages[index]
+                                                        .date!
+                                                        .toDate()
+                                                        .minute
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                            IconButton(
+                                              onPressed: () async {
+                                                batchDelete();
+                                              },
+                                              icon: Icon(Icons.delete),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       },
                     );
@@ -187,5 +212,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('1234');
+
+  Future<void> batchDelete() {
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    return users.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((FieldValue) {
+        batch.delete(FieldValue.reference);
+      });
+
+      return batch.commit();
+    });
   }
 }

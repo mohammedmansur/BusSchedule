@@ -28,13 +28,21 @@ class _LoginPageState extends State<LoginPage> {
             key: _key,
             children: [
               const SizedBox(
-                height: 50,
+                height: 80,
               ),
-              Container(
-                height: 350,
-                child: Image.network(
-                  'https://cdn.dribbble.com/users/330915/screenshots/5676354/media/e151885ba4d799b4262cb38259d33fbc.gif',
-                ),
+
+              Lottie.asset('assets/lottieJSON/bus.json',
+                  width: 600, height: 200, fit: BoxFit.cover),
+
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(100),
+              //   child: Image.network(
+              //     'https://cdn.dribbble.com/users/330915/screenshots/5676354/media/e151885ba4d799b4262cb38259d33fbc.gif',
+              //     height: 300,
+              //   ),
+              // ),
+              const SizedBox(
+                height: 90,
               ),
               const Text(
                 'Welcome',
@@ -44,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               Form(
                   child: Column(
@@ -131,11 +139,13 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/SignUp');
+                        },
                         child: const Text(
                           'Forgot Password?',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.blue,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w400),
                         ),
@@ -170,7 +180,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 100,
+                  ),
+                  Divider(
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -183,13 +196,15 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w400),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/SignUp');
+                        },
                         child: const Text(
                           'Register',
                           style: TextStyle(
                               color: Colors.blue,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400),
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600),
                         ),
                       )
                     ],

@@ -10,8 +10,8 @@ class Routing extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomeScreen(),
-        '/LoginPage': (context) => const LoginPage(),
+        '/': (context) => const LoginPage(),
+        //'/LoginPage': (context) => const LoginPage(),
       },
     );
   }

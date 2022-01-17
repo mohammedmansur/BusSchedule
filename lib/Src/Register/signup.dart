@@ -1,10 +1,13 @@
+import 'package:bus_station/Src/Log/Login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../Service/auth_service.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bus_station/Src/Log/Login.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -132,6 +135,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextField(
                     controller: _phoneController,
+                    keyboardType: TextInputType.phone,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
@@ -172,6 +176,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextField(
                     controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
@@ -219,6 +224,7 @@ class _SignUpState extends State<SignUp> {
                       );
                     },
                     controller: _birthDateController,
+                    keyboardType: TextInputType.datetime,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
@@ -259,6 +265,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextField(
                     controller: _passwordController,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
@@ -301,6 +309,8 @@ class _SignUpState extends State<SignUp> {
                     controller: _confirmPasswordController,
                     onSubmitted: (value) => TextInputAction.next,
                     cursorColor: Colors.black,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
                       labelText: 'Confirm Password',
@@ -340,15 +350,31 @@ class _SignUpState extends State<SignUp> {
                   ),
                   MaterialButton(
                     onPressed: () async {
-                      // setState(() {
-                      //   name = _userNameController.value.text;
-                      //   password = _passwordController.value.text;
-                      // });
-                      // name = name.trim(); //remove spaces
-                      // name = name.toLowerCase(); //convert to lowercase
-                      // await Provider.of<AuthService>(context, listen: false)
-                      //     .registerWithEmailAndPassword(name, password!);
-                      // Navigator.pop(context); //pop the current screen
+                      if (_passwordController.value.text !=
+                          _confirmPasswordController.value.text) {
+                        Text('Not Maching',
+                            style: TextStyle(color: Colors.red));
+                        debugPrint('hi');
+                      } else {
+                        setState(() {
+                          name = _fullNameController.value.text;
+                          password = _passwordController.value.text;
+                        });
+                        name = name.trim(); //remove spaces
+                        name = name.toLowerCase(); //convert to lowercase
+
+                        await Provider.of<AuthService>(context, listen: false)
+                            .registerWithEmailAndPassword(name, password!);
+                        await FirebaseFirestore.instance.collection('111').add({
+                          'fullname': _fullNameController.value.text,
+                          'city': _cityController.value.text,
+                          'email': _emailController.value.text,
+                          'phone': _phoneController.value.text,
+                          'password': _passwordController.value.text,
+                        });
+                        Navigator.pushNamed(context, '/home');
+                        debugPrint('hello');
+                      }
                     },
                     height: 45,
                     color: Colors.blue,

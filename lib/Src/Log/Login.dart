@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import '../Service/auth_service.dart';
 import 'package:lottie/lottie.dart';
 
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -139,9 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/SignUp');
-                        },
+                        onPressed: () {},
                         child: const Text(
                           'Forgot Password?',
                           style: TextStyle(
@@ -217,4 +216,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  
 }

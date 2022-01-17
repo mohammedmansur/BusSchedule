@@ -14,6 +14,7 @@ class Routing extends StatelessWidget {
         '/': (context) => const LoginPage(),
         //'/LoginPage': (context) => const LoginPage(),
         '/SignUp': (context) => const SignUp(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey.shade800,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset('assets/images/avatar-1.png')),
+                    child: Image.asset('assets/R.jpg')),
                 const SizedBox(
                   height: 10,
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../Service/auth_service.dart';
 import 'package:lottie/lottie.dart';
+import 'package:bus_station/Src/Home/HomeScreen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = '';
   String? password;
+  String? theLoggedInUser;
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -107,6 +109,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextField(
                     controller: _passwordController,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
                     onSubmitted: (value) => TextInputAction.next,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
@@ -171,9 +175,18 @@ class _LoginPageState extends State<LoginPage> {
                       });
                       name = name.trim(); //remove spaces
                       name = name.toLowerCase(); //convert to lowercase
+
                       await Provider.of<AuthService>(context, listen: false)
-                          .registerWithEmailAndPassword(name, password!);
-                      Navigator.pop(context); //pop the current screen
+                          .loginWithEmailAndPassword(name, password!)
+                          .then((value) {
+                        setState(() {
+                          theLoggedInUser = value!.user!.uid;
+                        });
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      });
                     },
                     height: 45,
                     color: Colors.blue,

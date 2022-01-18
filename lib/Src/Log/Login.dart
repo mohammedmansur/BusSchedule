@@ -21,6 +21,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
+          icon: Icon(
+            Icons.home,
+            color: Colors.blue,
+          )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

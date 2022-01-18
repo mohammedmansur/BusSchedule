@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Log/Login.dart';
-import 'Home/Home.dart';
+import 'Home/Chat.dart';
+import 'Home/HomeScreen.dart';
 import 'Register/signup.dart';
 
 class Routing extends StatelessWidget {
@@ -11,9 +12,9 @@ class Routing extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(),
-        //'/LoginPage': (context) => const LoginPage(),
+        '/': (context) => const HomePage(),
         '/SignUp': (context) => const SignUp(),
+        '/Login': (context) => const LoginPage(),
       },
     );
   }

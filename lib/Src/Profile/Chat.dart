@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 import 'general_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ChatScreenState extends State<ChatScreen> {
   final _formGlobalKey = GlobalKey<FormState>();
   final TextEditingController _chatController = TextEditingController();
   final TextEditingController _editingController = TextEditingController();
@@ -33,9 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(pro),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            backgroundImage: AssetImage("assets/pn.jpg"),
-          )
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ProfileList');
+              },
+              icon: const Icon(
+                Iconsax.personalcard,
+                size: 30,
+              ))
         ],
       ),
       body: Stack(

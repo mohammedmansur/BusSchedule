@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'GeneraL_Pro.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -10,6 +11,9 @@ class ProScreen extends StatefulWidget {
 }
 
 class _ProScreenState extends State<ProScreen> {
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
   List<Student> _users = [
     Student(
         'Elliana Palacios',
@@ -218,8 +222,15 @@ class _ProScreenState extends State<ProScreen> {
                           : Colors.grey.shade700,
                     )),
                 child: Center(
-                    child:
-                        TextButton(onPressed: () {}, child: Text('Follow')))),
+                    child: TextButton(
+                        onPressed: () {
+                          _users.add(Student(
+                              'Mikayla Marquez',
+                              '@mikayla',
+                              'https://images.unsplash.com/photo-1541710430735-5fca14c95b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+                              false));
+                        },
+                        child: Text('Follow')))),
           )
         ],
       ),
@@ -254,7 +265,7 @@ class _ProScreenState extends State<ProScreen> {
                         fontSize: 14.0,
                       ),
                       prefixIcon: const Icon(
-                        Icons.alternate_email_outlined,
+                        Iconsax.personalcard,
                         color: Colors.black,
                         size: 18,
                       ),
@@ -279,8 +290,8 @@ class _ProScreenState extends State<ProScreen> {
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
-                      labelText: 'Name',
-                      hintText: 'Full Name',
+                      labelText: 'UserName',
+                      hintText: '@username',
                       labelStyle: const TextStyle(
                         color: Colors.black,
                         fontSize: 14.0,
@@ -291,7 +302,7 @@ class _ProScreenState extends State<ProScreen> {
                         fontSize: 14.0,
                       ),
                       prefixIcon: const Icon(
-                        Icons.alternate_email_outlined,
+                        Iconsax.user,
                         color: Colors.black,
                         size: 18,
                       ),
@@ -312,19 +323,12 @@ class _ProScreenState extends State<ProScreen> {
                     ),
                   ),
                   TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    onTap: () {
-                      showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000, 1, 1),
-                          lastDate: DateTime(2020, 12, 30));
-                    },
+                    keyboardType: TextInputType.datetime,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0.0),
-                      labelText: 'Date',
-                      hintText: 'Date Time',
+                      labelText: 'Date&Time',
+                      hintText: 'YY-MM-DD',
                       labelStyle: const TextStyle(
                         color: Colors.black,
                         fontSize: 14.0,
@@ -335,7 +339,7 @@ class _ProScreenState extends State<ProScreen> {
                         fontSize: 14.0,
                       ),
                       prefixIcon: const Icon(
-                        Icons.alternate_email_outlined,
+                        Icons.date_range,
                         color: Colors.black,
                         size: 18,
                       ),
@@ -355,6 +359,12 @@ class _ProScreenState extends State<ProScreen> {
                       ),
                     ),
                   ),
+                  SimpleDialogOption(
+                    child: Text(
+                      'Submit',
+                    ),
+                    onPressed: () {},
+                  )
                 ],
               ))
             ],

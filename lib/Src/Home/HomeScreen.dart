@@ -95,10 +95,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.pushNamed(context, '/Profile');
+                    Navigator.pushNamed(context, '/Chat');
                   },
-                  leading: const Icon(Iconsax.support),
-                  title: const Text('Student List'),
+                  leading: const Icon(Iconsax.message),
+                  title: const Text('Chat'),
                 ),
                 ListTile(
                   onTap: () {

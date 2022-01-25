@@ -28,6 +28,7 @@ class _ProScreenState extends State<ProScreen> {
     });
   }
 
+// this function is for search in the list
   onSearch(String search) {
     setState(() {
       _foundedUsers = _users
@@ -75,6 +76,7 @@ class _ProScreenState extends State<ProScreen> {
           ),
         ),
       ),
+      //in body we put a condition fore if not have any user
       body: Container(
         child: _foundedUsers.length > 0
             ? ListView.builder(
@@ -95,6 +97,7 @@ class _ProScreenState extends State<ProScreen> {
     );
   }
 
+//this function user for a list view bulder to create a Ui of a list
   userComponent({required Student student}) {
     return Container(
       decoration: BoxDecoration(
@@ -134,6 +137,7 @@ class _ProScreenState extends State<ProScreen> {
     );
   }
 
+// show dialog for create new user to list
   void _showMaterialDialog(context) {
     showDialog(
         context: context,

@@ -1,6 +1,11 @@
+import 'package:bus_station/Src/Log/chang_password.dart';
 import 'package:flutter/material.dart';
 import 'Log/Login.dart';
+
+import 'Home/Chat.dart';
+
 import 'Profile/Chat.dart';
+
 import 'Home/HomeScreen.dart';
 import 'Register/signup.dart';
 import 'Student/ProScreen.dart';
@@ -13,11 +18,18 @@ class Routing extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
+
+        '/': (context) => const HomePage(),
+        '/SignUp': (context) => const SignUp(),
+        '/Login': (context) => const LoginPage(),
+        '/ChangPassword': (context) => const ChangPassword(),
+
         '/': (context) => const ProScreen(),
         '/SignUp': (context) => const SignUp(),
         '/Login': (context) => const LoginPage(),
         '/ProfileList': (context) => const ProScreen(),
         '/Chat': (context) => const ChatScreen(),
+
       },
     );
   }

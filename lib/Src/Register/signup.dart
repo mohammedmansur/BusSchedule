@@ -8,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bus_station/Src/Log/Login.dart';
 
-
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String name = '';
+  String email = '';
   String? password;
 
   final TextEditingController _fullNameController = TextEditingController();
@@ -216,13 +215,6 @@ class _SignUpState extends State<SignUp> {
                     height: 20,
                   ),
                   TextField(
-                    onTap: () {
-                      DatePickerDialog(
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000, 1, 1),
-                        lastDate: DateTime(2020, 12, 1),
-                      );
-                    },
                     controller: _birthDateController,
                     keyboardType: TextInputType.datetime,
                     cursorColor: Colors.black,
@@ -307,7 +299,6 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextField(
                     controller: _confirmPasswordController,
-                    onSubmitted: (value) => TextInputAction.next,
                     cursorColor: Colors.black,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
@@ -357,14 +348,15 @@ class _SignUpState extends State<SignUp> {
                         debugPrint('hi');
                       } else {
                         setState(() {
-                          name = _fullNameController.value.text;
+                          email = _emailController.value.text;
                           password = _passwordController.value.text;
                         });
-                        name = name.trim(); //remove spaces
-                        name = name.toLowerCase(); //convert to lowercase
+                        email = email
+                            .trim()
+                            .toLowerCase(); //remove spaces and convert to lowercase
 
                         await Provider.of<AuthService>(context, listen: false)
-                            .registerWithEmailAndPassword(name, password!);
+                            .registerWithEmailAndPassword(email, password!);
                         await FirebaseFirestore.instance.collection('111').add({
                           'fullname': _fullNameController.value.text,
                           'city': _cityController.value.text,
@@ -372,7 +364,7 @@ class _SignUpState extends State<SignUp> {
                           'phone': _phoneController.value.text,
                           'password': _passwordController.value.text,
                         });
-                        Navigator.pushNamed(context, '/home');
+                        Navigator.pop(context);
                         debugPrint('hello');
                       }
                     },

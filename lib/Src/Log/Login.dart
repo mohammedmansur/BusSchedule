@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
             Icons.home,
             color: Colors.blue,
           )),
-
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -39,43 +38,6 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 key: _key,
-
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            key: _key,
-            children: [
-              const SizedBox(
-                height: 80,
-              ),
-
-              Lottie.asset('assets/lottieJSON/bus.json',
-                  width: 600, height: 200, fit: BoxFit.cover),
-
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(100),
-              //   child: Image.network(
-              //     'https://cdn.dribbble.com/users/330915/screenshots/5676354/media/e151885ba4d799b4262cb38259d33fbc.gif',
-              //     height: 300,
-              //   ),
-              // ),
-              const SizedBox(
-                height: 90,
-              ),
-              const Text(
-                'Welcome',
-                style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Form(
-                  child: Column(
-
                 children: [
                   Lottie.asset('assets/lottieJSON/bus.json',
                       width: 600, height: 200, fit: BoxFit.cover),
@@ -92,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 40,
                   ),
-
                   Form(
                       child: Column(
                     children: [
@@ -132,26 +93,6 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    onSubmitted: (value) => TextInputAction.next,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(0.0),
-                      labelText: 'Password',
-                      hintText: 'Password',
-                      hintStyle: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.0,
-                      ),
-                      labelStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w400,
-
                       ),
                       const SizedBox(
                         height: 20,
@@ -243,78 +184,10 @@ class _LoginPageState extends State<LoginPage> {
                           "Login",
                           style: TextStyle(color: Colors.white, fontSize: 16.0),
                         ),
-
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
-
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  MaterialButton(
-                    onPressed: () async {
-                      setState(() {
-                        name = _userNameController.value.text;
-                        password = _passwordController.value.text;
-                      });
-                      name = name.trim(); //remove spaces
-                      name = name.toLowerCase(); //convert to lowercase
-
-                      await Provider.of<AuthService>(context, listen: false)
-                          .loginWithEmailAndPassword(name, password!)
-                          .then((value) {
-                        setState(() {
-                          theLoggedInUser = value!.user!.uid;
-                        });
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                      });
-                    },
-                    height: 45,
-                    color: Colors.blue,
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white, fontSize: 16.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Divider(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyle(
-                            color: Colors.grey.shade600,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/SignUp');
-                        },
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w600),
-
                         ),
                       ),
                       const SizedBox(

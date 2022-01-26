@@ -1,8 +1,7 @@
-
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:iconsax/iconsax.dart';
-
 
 void main() {
   runApp(const MaterialApp(
@@ -10,8 +9,6 @@ void main() {
     debugShowCheckedModeBanner: false,
   ));
 }
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -85,26 +82,16 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey.shade800,
                 ),
                 ListTile(
-
                   onTap: () {
                     Navigator.pushNamed(context, '/ChangPassword');
                   },
                   leading: const Icon(Iconsax.home),
                   title: const Text('Dashboard'),
-
-                  onTap: () {},
-                  leading: const Icon(Iconsax.home),
-                  title: const Text('Profile'),
-
                 ),
                 ListTile(
                   onTap: () {},
                   leading: const Icon(Iconsax.chart_2),
-
                   title: const Text('Analytics'),
-
-                  title: const Text('FeedBack'),
-
                 ),
                 ListTile(
                   onTap: () {},
@@ -117,17 +104,9 @@ class _HomePageState extends State<HomePage> {
                   title: const Text('Settings'),
                 ),
                 ListTile(
-
                   onTap: () {},
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
-
-                  onTap: () {
-                    Navigator.pushNamed(context, '/Chat');
-                  },
-                  leading: const Icon(Iconsax.message),
-                  title: const Text('Chat'),
-
                 ),
                 ListTile(
                   onTap: () {
@@ -137,7 +116,6 @@ class _HomePageState extends State<HomePage> {
                   title: const Text('Sign In'),
                 ),
                 const Spacer(),
-
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
@@ -145,8 +123,6 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(color: Colors.grey.shade500),
                   ),
                 )
-
-
               ],
             ),
           ),

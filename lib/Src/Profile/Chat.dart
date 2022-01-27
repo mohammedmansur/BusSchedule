@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
+import '../../SizeConfig.dart';
 import 'general_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -24,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     var _authProvider = Provider.of<AuthService>(context);
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,

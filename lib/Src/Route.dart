@@ -1,7 +1,7 @@
 import 'package:bus_station/Src/Log/chang_password.dart';
 import 'package:flutter/material.dart';
 import 'Log/Login.dart';
-
+import '../SizeConfig.dart';
 import 'Home/Chat.dart';
 
 import 'Profile/Chat.dart';
@@ -18,15 +18,11 @@ class Routing extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-
         '/': (context) => const HomePage(),
         '/SignUp': (context) => const SignUp(),
         '/Login': (context) => const LoginPage(),
         '/ChangPassword': (context) => const ChangPassword(),
-
-        
         '/Chat': (context) => const ChatScreen(),
-
       },
     );
   }

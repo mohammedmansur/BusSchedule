@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
 import 'package:lottie/lottie.dart';
 import 'package:bus_station/Src/Home/HomeScreen.dart';
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       bottomNavigationBar: IconButton(
           onPressed: () {

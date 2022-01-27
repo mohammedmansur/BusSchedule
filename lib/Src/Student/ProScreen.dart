@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../SizeConfig.dart';
 import 'GeneraL_Pro.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -39,6 +40,7 @@ class _ProScreenState extends State<ProScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       floatingActionButton: IconButton(
           onPressed: () => _showMaterialDialog(context),

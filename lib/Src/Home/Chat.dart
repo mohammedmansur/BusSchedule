@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../Profile/general_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../SizeConfig.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var _authProvider = Provider.of<AuthService>(context);
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,

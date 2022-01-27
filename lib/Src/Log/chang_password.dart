@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../SizeConfig.dart';
+
 class ChangPassword extends StatefulWidget {
   const ChangPassword({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class _ChangPasswordState extends State<ChangPassword> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white),
       body: Center(

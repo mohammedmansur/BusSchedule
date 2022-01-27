@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import '../Service/auth_service.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -67,14 +69,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Image.asset('assets/R.jpg')),
                 const SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 30.0),
+                Padding(
+                  padding: EdgeInsets.only(left: 35.0),
                   child: Text(
-                    "John Doe",
+                    Provider.of<AuthService>(context, listen: true).theUser !=
+                            null
+                        ? Provider.of<AuthService>(context, listen: true)
+                            .theUser!
+                            .email!
+                        : 'no user',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 const Spacer(),
@@ -108,13 +116,22 @@ class _HomePageState extends State<HomePage> {
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
                 ),
-                ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/Login');
-                  },
-                  leading: const Icon(Iconsax.login),
-                  title: const Text('Sign In'),
-                ),
+                Provider.of<AuthService>(context, listen: true).theUser != null
+                    ? ListTile(
+                        onTap: () {
+                          Provider.of<AuthService>(context, listen: false)
+                              .logOut();
+                        },
+                        leading: const Icon(Iconsax.logout),
+                        title: const Text('SignOut'),
+                      )
+                    : ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/Login');
+                        },
+                        leading: const Icon(Iconsax.login),
+                        title: const Text('Sign In'),
+                      ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(20.0),

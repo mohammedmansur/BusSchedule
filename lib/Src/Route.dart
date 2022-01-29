@@ -9,6 +9,7 @@ import 'Profile/Chat.dart';
 import 'Home/HomeScreen.dart';
 import 'Register/signup.dart';
 import 'Student/ProScreen.dart';
+import 'Home/MainHome.dart';
 
 class Routing extends StatelessWidget {
   const Routing({Key? key}) : super(key: key);

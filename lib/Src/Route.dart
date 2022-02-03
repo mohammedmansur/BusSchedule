@@ -1,4 +1,6 @@
 import 'package:bus_station/Src/Log/chang_password.dart';
+import 'package:bus_station/Src/Register/verfication.dart';
+import 'package:bus_station/Src/Register/verification_input_number.dart';
 import 'package:flutter/material.dart';
 import 'Log/Login.dart';
 import '../SizeConfig.dart';
@@ -24,6 +26,8 @@ class Routing extends StatelessWidget {
         '/Login': (context) => const LoginPage(),
         '/ChangPassword': (context) => const ChangPassword(),
         '/Chat': (context) => const ChatScreen(),
+         '/verfication': (context) => const verfication_screen(),
+         '/verficationNumber': (context) => const phoneNumberVerification(),
       },
     );
   }

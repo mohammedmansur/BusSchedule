@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "304443538765",
-    "project_id": "bus-station-75c61",
-    "storage_bucket": "bus-station-75c61.appspot.com"
+    "project_number": "85810699454",
+    "project_id": "bus-schedule-1391b",
+    "storage_bucket": "bus-schedule-1391b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:304443538765:android:ee58ecbe324c12c6858b04",
+        "mobilesdk_app_id": "1:85810699454:android:16e8ae64c63d815e4212ef",
         "android_client_info": {
-          "package_name": "com.example.bus_station"
+          "package_name": "com.android.application"
         }
       },
       "oauth_client": [
         {
-          "client_id": "304443538765-m0ukpcmatu8rbfqtn2j0kbv2nd06utii.apps.googleusercontent.com",
+          "client_id": "85810699454-mqs2772bgt910v9hebv6sj2b0be9en62.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCRpJ65Y9HquBTIfWu_RRmmnLZyCUgHre4"
+          "current_key": "AIzaSyDRkTMdEykDqRoFv0saCtvBHTKWlZwR0Sg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "304443538765-m0ukpcmatu8rbfqtn2j0kbv2nd06utii.apps.googleusercontent.com",
+              "client_id": "85810699454-mqs2772bgt910v9hebv6sj2b0be9en62.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

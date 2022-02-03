@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>304443538765-3630b6co4qdpfvl3jg0p8aoduujj675v.apps.googleusercontent.com</string>
+	<string>85810699454-7cjpum097tuj92dm13m9lqpblbtsouum.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.304443538765-3630b6co4qdpfvl3jg0p8aoduujj675v</string>
+	<string>com.googleusercontent.apps.85810699454-7cjpum097tuj92dm13m9lqpblbtsouum</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA4leJyvit4CJu1xPNyzxbgYmIF8y6tUxM</string>
+	<string>AIzaSyB1UOKLotoou15zAl72D3NtWYhjjHkPagg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>304443538765</string>
+	<string>85810699454</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.busStationcom.example.busStation</string>
+	<string>com.omermukhtar.busStation</string>
 	<key>PROJECT_ID</key>
-	<string>bus-station-75c61</string>
+	<string>bus-schedule-1391b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bus-station-75c61.appspot.com</string>
+	<string>bus-schedule-1391b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:304443538765:ios:e107d514f1d818a7858b04</string>
-	<key>DATABASE_URL</key>
-	<string>https://bus-station-75c61-default-rtdb.firebaseio.com</string>
+	<string>1:85810699454:ios:7f168ce511c2378d4212ef</string>
 </dict>
 </plist>

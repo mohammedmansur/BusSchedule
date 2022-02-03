@@ -36,7 +36,10 @@ class _SignUpState extends State<SignUp> {
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register",style: TextStyle(color: Colors.black),),
+        title: Text(
+          "Register",
+          style: TextStyle(color: Colors.black),
+        ),
         leading: BackButton(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -354,7 +357,7 @@ class _SignUpState extends State<SignUp> {
                           _confirmPasswordController.value.text) {
                         Text('Not Maching',
                             style: TextStyle(color: Colors.red));
-                        debugPrint('hi');
+                        debugPrint('password was incorrect');
                       } else {
                         setState(() {
                           email = _emailController.value.text;
@@ -366,7 +369,9 @@ class _SignUpState extends State<SignUp> {
 
                         await Provider.of<AuthService>(context, listen: false)
                             .registerWithEmailAndPassword(email, password!);
-                        await FirebaseFirestore.instance.collection('111').add({
+                        await FirebaseFirestore.instance
+                            .collection('Passenger')
+                            .add({
                           'fullname': _fullNameController.value.text,
                           'city': _cityController.value.text,
                           'email': _emailController.value.text,

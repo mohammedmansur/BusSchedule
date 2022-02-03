@@ -22,7 +22,7 @@ class _phoneNumberVerificationState extends State<phoneNumberVerification> {
           icon: Icon(
             Iconsax.arrow_left4,
           ),
-          iconSize: 30,
+          iconSize: 30, //size
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 0.0, // remove shadow of appbar
@@ -48,22 +48,22 @@ class _phoneNumberVerificationState extends State<phoneNumberVerification> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 250, bottom: 8),
-            child:  Text(
-            "please enter your phone No.",
-            style: TextStyle(
-              fontSize: 18.0,
+            child: Text(
+              "please enter your phone No.",
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
             ),
           ),
-          ),
-         
           SizedBox(
             height: 30,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 60, right: 60),
             child: TextField(
-              
-               controller: TextEditingController(text: "+964", ),
+              controller: TextEditingController(
+                text: "+964",
+              ),
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 20),

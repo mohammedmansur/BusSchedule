@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types
-
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../Service/auth_service.dart';
 
 class phoneNumberVerification extends StatefulWidget {
   const phoneNumberVerification({Key? key}) : super(key: key);

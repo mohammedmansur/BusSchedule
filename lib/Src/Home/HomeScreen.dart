@@ -118,6 +118,13 @@ class _HomePageState extends State<HomePage> {
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
                 ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/SignUp');
+                  },
+                  leading: const Icon(Iconsax.login_14),
+                  title: const Text('Sign Up'),
+                ),
                 Provider.of<AuthService>(context, listen: true).theUser != null
                     ? ListTile(
                         onTap: () {

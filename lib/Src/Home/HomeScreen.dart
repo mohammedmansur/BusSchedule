@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.pushNamed(context, '/ChangPassword');
+                    Navigator.pushNamed(context, '/ProfileScreen');
                   },
                   leading: const Icon(Iconsax.home),
                   title: const Text('Dashboard'),

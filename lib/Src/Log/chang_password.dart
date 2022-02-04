@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
@@ -21,7 +20,11 @@ class _ChangPasswordState extends State<ChangPassword> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.black),
+        elevation: 0,
+      ),
       body: Center(
         child: Padding(
           padding:

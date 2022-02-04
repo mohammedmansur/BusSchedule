@@ -11,6 +11,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
         title: Text(
           "Profile",
@@ -58,8 +59,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               Container(
+                padding: const EdgeInsets.only(bottom: 180),
                 decoration: BoxDecoration(
-                    color: Colors.amber,
+                    color: Colors.grey,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),

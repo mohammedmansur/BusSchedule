@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return AdvancedDrawer(
-      backdropColor: Colors.grey.shade900,
+      backdropColor: Colors.grey.shade800,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -55,11 +55,11 @@ class _HomePageState extends State<HomePage> {
             textColor: Colors.white,
             iconColor: Colors.white,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                    width: 80.0,
-                    height: 80.0,
+                    width: 100.0,
+                    height: 100.0,
                     margin: const EdgeInsets.only(
                       left: 20,
                       top: 24.0,
@@ -87,9 +87,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const Spacer(),
+                const Spacer(
+                  flex: 5,
+                ),
                 Divider(
-                  color: Colors.grey.shade800,
+                  thickness: 2,
+                  indent: 20,
+                  height: 3,
+                  endIndent: 2,
+                  color: Colors.white54,
+                ),
+                const Spacer(
+                  flex: 3,
                 ),
                 ListTile(
                   onTap: () {
@@ -117,6 +126,16 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {},
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
+                ),
+                Spacer(
+                  flex: 5,
+                ),
+                Divider(
+                  thickness: 2,
+                  indent: 20,
+                  height: 3,
+                  endIndent: 2,
+                  color: Colors.white54,
                 ),
                 ListTile(
                   onTap: () {

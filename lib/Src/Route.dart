@@ -27,8 +27,8 @@ class Routing extends StatelessWidget {
         '/Login': (context) => const LoginPage(),
         '/ChangPassword': (context) => const ChangPassword(),
         '/Chat': (context) => const ChatScreen(),
-         '/verfication': (context) => const verfication_screen(),
-         '/verficationNumber': (context) => const phoneNumberVerification(),
+         '/verfication': (context) => verfication_screen(),
+         '/verficationNumber': (context) => phoneNumberVerification(),
          '/ProfileScreen': (context) => const ProfileScreen(),
       },
     );

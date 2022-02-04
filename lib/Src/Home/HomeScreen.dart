@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -186,14 +185,6 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {}, icon: const Icon(Iconsax.notification))
                 ],
               ),
-              const GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(37.773972, -122.431297),
-                  zoom: 11.5,
-                ),
-                zoomControlsEnabled: true,
-                myLocationButtonEnabled: true,
-              )
             ],
           ),
         ),

@@ -9,6 +9,7 @@ import 'Home/Chat.dart';
 import 'Profile/Chat.dart';
 
 import 'Home/HomeScreen.dart';
+import 'Profile/profile_screen.dart';
 import 'Register/signup.dart';
 import 'Student/ProScreen.dart';
 import 'Home/MainHome.dart';
@@ -28,6 +29,7 @@ class Routing extends StatelessWidget {
         '/Chat': (context) => const ChatScreen(),
          '/verfication': (context) => const verfication_screen(),
          '/verficationNumber': (context) => const phoneNumberVerification(),
+         '/ProfileScreen': (context) => const ProfileScreen(),
       },
     );
   }

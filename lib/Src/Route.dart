@@ -1,3 +1,5 @@
+import 'package:bus_station/Src/Home/about.dart';
+import 'package:bus_station/Src/Home/map.dart';
 import 'package:bus_station/Src/Log/chang_password.dart';
 import 'package:bus_station/Src/Register/register_with_phone.dart';
 import 'package:bus_station/Src/Register/verfication.dart';
@@ -28,6 +30,8 @@ class Routing extends StatelessWidget {
         '/ProfileScreen': (context) => const ProfileScreen(),
         '/v': (context) => const Verificatoin(),
         '/r': (context) => const RegisterWithPhoneNumber(),
+        '/AboutUs': (context) => const AboutUs(),
+        '/MapWidget': (context) => const MapWidget(),
       },
     );
   }

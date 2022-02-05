@@ -1,13 +1,16 @@
+import 'dart:async';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     home: HomePage(),
     debugShowCheckedModeBanner: false,
   ));
@@ -26,6 +29,15 @@ class _HomePageState extends State<HomePage> {
   @override
   final _advancedDrawerController = AdvancedDrawerController();
 
+  final Completer<GoogleMapController> _controller = Completer();
+  String? _mapStyle;
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    bearing: 192.8334901395799,
+    target: LatLng(36.1934578323925, 43.96567824238303),
+    tilt: 59.440717697143555,
+    zoom: 40.4746,
+  );
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -34,13 +46,13 @@ class _HomePageState extends State<HomePage> {
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
-      animateChildDecoration: true,
+      animateChildDecoration: false,
       rtlOpening: false,
       disabledGestures: false,
       childDecoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade900,
+            color: Colors.grey.shade800,
             blurRadius: 20.0,
             spreadRadius: 5.0,
             offset: const Offset(-20.0, 0.0),
@@ -109,10 +121,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.pushNamed(context, '/verfication');
+                    Navigator.pushNamed(context, '/AboutUs');
                   },
-                  leading: const Icon(Iconsax.chart_2),
-                  title: const Text('Analytics'),
+                  leading: const Icon(Iconsax.book),
+                  title: const Text('About us'),
                 ),
                 ListTile(
                   onTap: () {
@@ -134,6 +146,13 @@ class _HomePageState extends State<HomePage> {
                   },
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/MapWidget');
+                  },
+                  leading: const Icon(Iconsax.support),
+                  title: const Text('Map'),
                 ),
                 Spacer(
                   flex: 5,
@@ -182,40 +201,41 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50,
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: <Widget>[
+              GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                  controller.setMapStyle(_mapStyle); // change the map style
+                },
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    color: Colors.black,
-                    onPressed: _handleMenuButtonPressed,
-                    icon: ValueListenableBuilder<AdvancedDrawerValue>(
-                      valueListenable: _advancedDrawerController,
-                      builder: (_, value, __) {
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 250),
-                          child: Icon(
-                            value.visible ? Iconsax.close_square : Iconsax.menu,
-                            key: ValueKey<bool>(value.visible),
-                          ),
-                        );
-                      },
-                    ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 55,
+                  left: 5,
+                ),
+                child: IconButton(
+                  color: Colors.black,
+                  onPressed: _handleMenuButtonPressed,
+                  icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                    valueListenable: _advancedDrawerController,
+                    builder: (_, value, __) {
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        child: Icon(
+                          value.visible ? Iconsax.close_square : Iconsax.menu,
+                          key: ValueKey<bool>(value.visible),
+                        ),
+                      );
+                    },
                   ),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Iconsax.notification))
-                ],
-              ),
+                ),
+              )
             ],
-          ),
-        ),
-      ),
+          )),
     );
   }
 

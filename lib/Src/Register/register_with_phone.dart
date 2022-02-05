@@ -91,7 +91,7 @@ class _RegisterWithPhoneNumberState extends State<RegisterWithPhoneNumber> {
                           selectorTextStyle: TextStyle(color: Colors.black),
                           textFieldController: controller,
                           formatInput: false,
-                          maxLength: 9,
+                          maxLength: 10,
                           keyboardType: TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           cursorColor: Colors.black,
@@ -125,43 +125,43 @@ class _RegisterWithPhoneNumberState extends State<RegisterWithPhoneNumber> {
                 const SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  controller: _birthDateController,
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(0.0),
-                    labelText: 'BirtDate',
-                    hintText: 'YY-MM-DD',
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    hintStyle: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14.0,
-                    ),
-                    prefixIcon: const Icon(
-                      Iconsax.cake,
-                      color: Colors.black,
-                      size: 18,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.grey.shade200, width: 2),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    floatingLabelStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.0,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
+                // TextField(
+                //   controller: _birthDateController,
+                //   cursorColor: Colors.black,
+                //   decoration: InputDecoration(
+                //     contentPadding: const EdgeInsets.all(0.0),
+                //     labelText: 'BirtDate',
+                //     hintText: 'YY-MM-DD',
+                //     labelStyle: const TextStyle(
+                //       color: Colors.black,
+                //       fontSize: 14.0,
+                //       fontWeight: FontWeight.w400,
+                //     ),
+                //     hintStyle: const TextStyle(
+                //       color: Colors.grey,
+                //       fontSize: 14.0,
+                //     ),
+                //     prefixIcon: const Icon(
+                //       Iconsax.cake,
+                //       color: Colors.black,
+                //       size: 18,
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide:
+                //           BorderSide(color: Colors.grey.shade200, width: 2),
+                //       borderRadius: BorderRadius.circular(10.0),
+                //     ),
+                //     floatingLabelStyle: const TextStyle(
+                //       color: Colors.black,
+                //       fontSize: 18.0,
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: Colors.black, width: 1.5),
+                //       borderRadius: BorderRadius.circular(10.0),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(
                   height: 20,
                 ),

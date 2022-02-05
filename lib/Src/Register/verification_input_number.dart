@@ -1,24 +1,25 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types
 import 'package:animate_do/animate_do.dart';
+import 'package:bus_station/Src/Register/signup.dart';
 import 'package:bus_station/Src/Register/verfication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../Service/auth_service.dart';
 
-
 class phoneNumberVerification extends StatefulWidget {
-   phoneNumberVerification({Key? key,}) : super(key: key);
+  phoneNumberVerification({
+    Key? key,
+  }) : super(key: key);
   @override
   _phoneNumberVerificationState createState() =>
       _phoneNumberVerificationState();
 }
 
 class _phoneNumberVerificationState extends State<phoneNumberVerification> {
-  
- FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-   final phoneNumberController = TextEditingController();
- String? phoneNumber = '';
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final TextEditingController phoneNumberController = TextEditingController();
+  String? phoneNumber = '';
   String? uid;
 
   @override
@@ -67,11 +68,12 @@ class _phoneNumberVerificationState extends State<phoneNumberVerification> {
             height: 30,
           ),
           Padding(
-            padding:  EdgeInsets.only(left: 60, right: 60),
+            padding: EdgeInsets.only(left: 60, right: 60),
             child: TextField(
               keyboardType: TextInputType.phone,
-             controller: phoneNumberController,
+              controller: phoneNumberController,
               decoration: InputDecoration(
+                labelText: 'Phone Number',
                 contentPadding: const EdgeInsets.only(left: 20),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 2),
@@ -89,10 +91,10 @@ class _phoneNumberVerificationState extends State<phoneNumberVerification> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 40),
+            padding: EdgeInsets.only(top: 40),
             child: MaterialButton(
               onPressed: () async {
-               phoneNumber = phoneNumberController.text.trim();
+                phoneNumber = phoneNumberController.text.trim();
 
                 await FirebaseAuth.instance.verifyPhoneNumber(
                   phoneNumber: phoneNumber!,
@@ -108,7 +110,6 @@ class _phoneNumberVerificationState extends State<phoneNumberVerification> {
                       MaterialPageRoute(
                         builder: (context) => verfication_screen(
                           verificationID: verificationId,
-                          
                         ),
                       ),
                     );

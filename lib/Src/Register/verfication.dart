@@ -22,6 +22,17 @@ class _verfication_screenState extends State<verfication_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+            icon: Icon(
+              Icons.home,
+              color: Colors.black,
+              size: 40,
+            )),
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
@@ -34,20 +45,6 @@ class _verfication_screenState extends State<verfication_screen> {
         elevation: 0.0, // remove shadow of appbar
         backgroundColor: Colors.white,
         foregroundColor: Colors.black, // change color of back icon
-
-        actions: [
-          SizedBox(
-            // this is for shift to left
-            width: 100,
-            child: IconButton(
-              icon: const Icon(Icons.home_rounded),
-              tooltip: 'go to home',
-              color: Colors.black,
-              iconSize: 34,
-              onPressed: () {},
-            ),
-          ),
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

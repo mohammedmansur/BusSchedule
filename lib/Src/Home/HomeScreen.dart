@@ -108,22 +108,30 @@ class _HomePageState extends State<HomePage> {
                   title: const Text('Dashboard'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/verfication');
+                  },
                   leading: const Icon(Iconsax.chart_2),
                   title: const Text('Analytics'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/verficationNumber');
+                  },
                   leading: const Icon(Iconsax.profile_2user),
                   title: const Text('Contacts'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/v');
+                  },
                   leading: const Icon(Iconsax.setting_2),
                   title: const Text('Settings'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/r');
+                  },
                   leading: const Icon(Iconsax.support),
                   title: const Text('Support'),
                 ),

@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,7 +8,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
-import 'package:flutter/src/rendering/object.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -208,10 +205,6 @@ class _HomePageState extends State<HomePage> {
           body: Stack(
             children: <Widget>[
               GoogleMap(
-                gestureRecognizers: Set()
-                  ..add(Factory<OneSequenceGestureRecognizer>(
-                      () => EagerGestureRecognizer())),
-                scrollGesturesEnabled: true,
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {

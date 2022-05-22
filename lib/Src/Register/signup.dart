@@ -33,7 +33,6 @@ class _SignUpState extends State<SignUp> {
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -4,7 +4,6 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
-import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,9 +30,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return AdvancedDrawer(
-      backdropColor: Colors.grey.shade800,
+      backdropColor: Color.fromARGB(255, 45, 45, 45),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -65,19 +63,20 @@ class _HomePageState extends State<HomePage> {
                     height: 100.0,
                     margin: const EdgeInsets.only(
                       left: 20,
-                      top: 24.0,
+                      top: 20.0,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade800,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset('assets/R.jpg')),
+                    child: Image.network(
+                        'https://th.bing.com/th/id/R.1300018473cc0038187aaa0e2604fa27?rik=aNeBzHZuOCnJzw&riu=http%3a%2f%2fwww.davidmonreal.com%2fwp-content%2fplugins%2fall-in-one-seo-pack%2fimages%2fdefault-user-image.png&ehk=brSt85s%2fyaaiglnl%2b2XO70sMRWv4JBEcig5c6cZya0g%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1')),
                 const SizedBox(
                   height: 15,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 35.0),
+                  padding: EdgeInsets.only(left: 25.0),
                   child: Text(
                     Provider.of<AuthService>(context, listen: true).theUser !=
                             null
@@ -158,13 +157,6 @@ class _HomePageState extends State<HomePage> {
                   endIndent: 2,
                   color: Colors.white54,
                 ),
-                ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/SignUp');
-                  },
-                  leading: const Icon(Iconsax.login_14),
-                  title: const Text('Sign Up'),
-                ),
                 Provider.of<AuthService>(context, listen: true).theUser != null
                     ? ListTile(
                         onTap: () {
@@ -179,7 +171,10 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pushNamed(context, '/Login');
                         },
                         leading: const Icon(Iconsax.login),
-                        title: const Text('Sign In'),
+                        title: const Text(
+                          'SignIn',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                 const Spacer(),
                 Padding(

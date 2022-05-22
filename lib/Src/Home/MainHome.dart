@@ -55,13 +55,12 @@ class SearchPage extends StatelessWidget {
       //bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0, // this will be set when a new tab is tapped
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Messages'),
+            icon: Icon(Icons.mail),
+            label: 'Messages',
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('Profile'))
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
         ],
       ),
     );

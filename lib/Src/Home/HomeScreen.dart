@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,13 +6,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../SizeConfig.dart';
 import '../Service/auth_service.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: HomePage(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -116,8 +107,11 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.pushNamed(context, '/ProfileScreen');
                   },
-                  leading: const Icon(Iconsax.home),
-                  title: const Text('Dashboard'),
+                  leading: const Icon(
+                    Iconsax.personalcard,
+                    size: 25,
+                  ),
+                  title: const Text('Profile'),
                 ),
                 ListTile(
                   onTap: () {

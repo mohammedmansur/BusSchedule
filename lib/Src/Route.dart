@@ -31,7 +31,7 @@ class Routing extends StatelessWidget {
         '/v': (context) => const Verificatoin(),
         '/r': (context) => const RegisterWithPhoneNumber(),
         '/AboutUs': (context) => const AboutUs(),
-        '/MapWidget': (context) => const MapWidget(),
+        // '/MapWidget': (context) => const MapWidget(),
       },
     );
   }

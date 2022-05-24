@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import '../Service/auth_service.dart';
 
@@ -20,15 +21,6 @@ class _HomePageState extends State<HomePage> {
   @override
   final _advancedDrawerController = AdvancedDrawerController();
 
-  final Completer<GoogleMapController> _controller = Completer();
-  String? _mapStyle;
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(36.1934578323925, 43.96567824238303),
-    tilt: 59.440717697143555,
-    zoom: 40.4746,
-  );
-
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
@@ -38,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: false,
       rtlOpening: false,
-      disabledGestures: false,
+      disabledGestures: true,
       childDecoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -79,14 +71,13 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.only(left: 25.0),
                   child: Text(
-                    // Provider.of<AuthService>(context, listen: true).theUser !=
-                    //         null
-                    //     ? Provider.of<AuthService>(context, listen: true)
-                    //         .theUser!
-                    //         .email!
-                    //     : 'no user',
-                    FirebaseAuth.instance.currentUser!.email!,
-                    style: TextStyle(
+                    Provider.of<AuthService>(context, listen: true).theUser !=
+                            null
+                        ? Provider.of<AuthService>(context, listen: true)
+                            .theUser!
+                            .email!
+                        : 'no user',
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
@@ -94,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 const Spacer(
                   flex: 5,
                 ),
-                Divider(
+                const Divider(
                   thickness: 2,
                   indent: 20,
                   height: 3,
@@ -193,15 +184,30 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
           backgroundColor: Colors.white,
+          floatingActionButton: Container(
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: IconButton(
+              icon: Icon(
+                Icons.currency_bitcoin,
+                size: 30,
+              ),
+              onPressed: () {},
+            ),
+          ),
           body: Stack(
             children: <Widget>[
-              GoogleMap(
-                mapType: MapType.normal,
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                  controller.setMapStyle(_mapStyle); // change the map style
-                },
+              FlutterMap(
+                options:
+                    MapOptions(center: LatLng(35.529779, 45.495944), zoom: 13),
+                layers: [
+                  TileLayerOptions(
+                    urlTemplate:
+                        'https://api.mapbox.com/styles/v1/busschedule00/cl3ipmari008j14rswuhjiink/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnVzc2NoZWR1bGUwMCIsImEiOiJjbDNpcGQweTMwMGV5M2Rxcjd4NWdyZTZkIn0.IuRAkqjJXDs1tSQ09bEJZg',
+                  ),
+                  PolylineLayerOptions(polylines: [
+                    Polyline(points: points, strokeWidth: 6, color: Colors.red)
+                  ])
+                ],
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -224,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           )),
     );
@@ -233,4 +239,94 @@ class _HomePageState extends State<HomePage> {
   void _handleMenuButtonPressed() {
     _advancedDrawerController.showDrawer();
   }
+
+  var points = <LatLng>[
+    LatLng(35.530818, 45.496320),
+    LatLng(35.530792, 45.495917),
+    LatLng(35.530788, 45.495139),
+    LatLng(35.530813, 45.494407),
+    LatLng(35.530813, 45.494407),
+    LatLng(35.531213, 45.492080),
+    LatLng(35.531401, 45.491298),
+    LatLng(35.531532, 45.490487),
+    LatLng(35.531567, 45.489905),
+    LatLng(35.531510, 45.489631),
+    LatLng(35.531283, 45.489009),
+    LatLng(35.530777, 45.487900),
+    LatLng(35.530393, 45.487229),
+    LatLng(35.530005, 45.486582),
+    LatLng(35.530009, 45.486507),
+    LatLng(35.529869, 45.486158),
+    LatLng(35.529764, 45.485573),
+    LatLng(35.529708, 45.484868),
+    LatLng(35.529647, 45.483062),
+    LatLng(35.529605, 45.480164),
+    LatLng(35.529598, 45.478447),
+    LatLng(35.529598, 45.478447),
+    LatLng(35.529420, 45.476250),
+    LatLng(35.529302, 45.476181),
+    LatLng(35.529210, 45.476132),
+    LatLng(35.529070, 45.476132),
+    LatLng(35.528348, 45.477098),
+    LatLng(35.528108, 45.477370),
+    LatLng(35.527492, 45.474786),
+    LatLng(35.527169, 45.473098),
+    LatLng(35.526544, 45.471145),
+    LatLng(35.525712, 45.468209),
+    LatLng(35.525218, 45.466498),
+    LatLng(35.524756, 45.464824),
+    LatLng(35.524086, 45.462469),
+    LatLng(35.525717, 45.461654),
+    LatLng(35.525999, 45.461643),
+    LatLng(35.526127, 45.461595),
+    LatLng(35.526184, 45.461488),
+    LatLng(35.530033, 45.459556),
+    LatLng(35.530362, 45.459460),
+    LatLng(35.530781, 45.459422),
+    LatLng(35.530941, 45.459123),
+    LatLng(35.531051, 45.458930),
+    LatLng(35.531273, 45.458771),
+    LatLng(35.534459, 45.457518),
+    LatLng(35.535752, 45.456882),
+    LatLng(35.536128, 45.456791),
+    LatLng(35.536211, 45.456646),
+    LatLng(35.536634, 45.456324),
+    LatLng(35.538150, 45.454594),
+    LatLng(35.538381, 45.454482),
+    LatLng(35.538486, 45.454369),
+    LatLng(35.538494, 45.454133),
+    LatLng(35.539271, 45.453033),
+    LatLng(35.539664, 45.452663),
+    LatLng(35.539861, 45.452534),
+    LatLng(35.539900, 45.452400),
+    LatLng(35.539884, 45.452271),
+    LatLng(35.541056, 45.451070),
+    LatLng(35.542135, 45.449895),
+    LatLng(35.542301, 45.449686),
+    LatLng(35.544886, 45.447505),
+    LatLng(35.545967, 45.446660),
+    LatLng(35.546556, 45.446290),
+    LatLng(35.547019, 45.446129),
+    LatLng(35.547970, 45.445754),
+    LatLng(35.548988, 45.445378),
+    LatLng(35.549744, 45.445123),
+    LatLng(35.550728, 45.444860),
+    LatLng(35.551238, 45.444409),
+    LatLng(35.551670, 45.445306),
+    LatLng(35.552067, 45.446364),
+    LatLng(35.552152, 45.446366),
+    LatLng(35.552217, 45.446323),
+    LatLng(35.551733, 45.445201),
+    LatLng(35.551259, 45.444278),
+    LatLng(35.552312, 45.443315),
+    LatLng(35.552589, 45.443047),
+    LatLng(35.552758, 45.442873),
+    LatLng(35.553243, 45.442680),
+    LatLng(35.554779, 45.442083),
+    LatLng(35.555076, 45.441972),
+    LatLng(35.555085, 45.442412),
+    LatLng(35.555229, 45.442960),
+    LatLng(35.555460, 45.442954),
+    LatLng(35.555392, 45.442835)
+  ];
 }

@@ -1,9 +1,11 @@
+import 'package:bus_station/Src/Data/DataModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthService extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   User? theUser = FirebaseAuth
       .instance.currentUser; //to have the current user as the initial value
 
@@ -36,6 +38,10 @@ class AuthService extends ChangeNotifier {
   logOut() async {
     await _firebaseAuth.signOut();
     setTheUser(null);
+  }
+
+  Future<void> addProfile(Datamodel pro) async {
+    await _firebaseFirestore.collection('Passenger').add(pro.toMap());
   }
 
   Stream<User?> get authStatusChanges => _firebaseAuth.authStateChanges();

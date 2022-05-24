@@ -1,3 +1,4 @@
+import 'package:bus_station/Src/Data/DataModel.dart';
 import 'package:bus_station/Src/Log/Login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   String email = '';
   String? password;
-
+  String? userid;
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -49,13 +50,10 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             key: _key,
             children: [
-              const SizedBox(
-                height: 40,
-              ),
               Lottie.asset('assets/lottieJSON/bus1.json',
                   width: 400,
-                  height: 100,
-                  fit: BoxFit.contain,
+                  height: 120,
+                  fit: BoxFit.cover,
                   alignment: Alignment.center),
               const SizedBox(
                 height: 40,
@@ -185,6 +183,88 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(
                     height: 20,
                   ),
+                  TextField(
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                    cursorColor: Colors.black,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(0.0),
+                      labelText: 'Phone Number',
+                      hintText: '+964 111 222 33 44',
+                      labelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      hintStyle: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.alternate_email_outlined,
+                        color: Colors.black,
+                        size: 18,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 2),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      floatingLabelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.0,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    controller: _passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    cursorColor: Colors.black,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(0.0),
+                      labelText: 'Password',
+                      hintText: '********',
+                      labelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      hintStyle: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.password,
+                        color: Colors.black,
+                        size: 18,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 2),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      floatingLabelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.0,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -219,9 +299,36 @@ class _SignUpState extends State<SignUp> {
                   ),
                   MaterialButton(
                     onPressed: () async {
-                      if (_emailController.value.text.length > 6) {
-                        Navigator.pushNamed(context, '/r');
-                      }
+                      AuthService authService = AuthService();
+                      email = _emailController.text.trim().toLowerCase();
+
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: email, password: _passwordController.text);
+                      await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: email, password: _passwordController.text)
+                          .then(
+                        (value) {
+                          setState(() {
+                            userid = FirebaseAuth.instance.currentUser!.uid;
+                          });
+                        },
+                      ).then((value) => FirebaseAuth.instance.signOut());
+
+                      await authService
+                          .addProfile(
+                            Datamodel(
+                              name: _fullNameController.text,
+                              email: email,
+                              password: _passwordController.text,
+                              birthDate: "16/11/2000",
+                              phone: _phoneController.text,
+                            ),
+                          )
+                          .then((value) => Navigator.pushNamed(context, '/'))
+                          .onError((error, stackTrace) => debugPrint(
+                              '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>error'));
 
                       // if (_passwordController.value.text !=
                       //     _confirmPasswordController.value.text) {

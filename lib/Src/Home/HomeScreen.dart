@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -78,12 +79,13 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.only(left: 25.0),
                   child: Text(
-                    Provider.of<AuthService>(context, listen: true).theUser !=
-                            null
-                        ? Provider.of<AuthService>(context, listen: true)
-                            .theUser!
-                            .email!
-                        : 'no user',
+                    // Provider.of<AuthService>(context, listen: true).theUser !=
+                    //         null
+                    //     ? Provider.of<AuthService>(context, listen: true)
+                    //         .theUser!
+                    //         .email!
+                    //     : 'no user',
+                    FirebaseAuth.instance.currentUser!.email!,
                     style: TextStyle(
                       color: Colors.white,
                     ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -169,16 +170,13 @@ class _LoginPageState extends State<LoginPage> {
                     });
                     name = name.trim(); //remove spaces
                     name = name.toLowerCase(); //convert to lowercase
-
-                    await Provider.of<AuthService>(context, listen: false)
-                        .loginWithEmailAndPassword(name, password!)
-                        .then((value) {
-                      setState(() {
-                        theLoggedInUser = value!.user!.uid;
-                      });
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    });
+                    await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: name, password: _passwordController.text)
+                        .then((value) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage())));
                   },
                   height: 45,
                   color: Colors.blue,

@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import '../Service/auth_service.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    PanelController _pc1 = PanelController();
     return AdvancedDrawer(
       backdropColor: Color.fromARGB(255, 45, 45, 45),
       controller: _advancedDrawerController,
@@ -184,54 +187,77 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
           backgroundColor: Colors.white,
-          floatingActionButton: Container(
-            decoration: BoxDecoration(shape: BoxShape.circle),
-            child: IconButton(
-              icon: Icon(
-                Icons.currency_bitcoin,
-                size: 30,
-              ),
-              onPressed: () {},
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
+              setState(() {
+                _pc1.open();
+              });
+            },
+            child: const Icon(
+              Icons.location_on,
+              color: (Colors.black),
             ),
           ),
-          body: Stack(
-            children: <Widget>[
-              FlutterMap(
-                options:
-                    MapOptions(center: LatLng(35.529779, 45.495944), zoom: 13),
-                layers: [
-                  TileLayerOptions(
-                    urlTemplate:
-                        'https://api.mapbox.com/styles/v1/busschedule00/cl3ipmari008j14rswuhjiink/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnVzc2NoZWR1bGUwMCIsImEiOiJjbDNpcGQweTMwMGV5M2Rxcjd4NWdyZTZkIn0.IuRAkqjJXDs1tSQ09bEJZg',
-                  ),
-                  PolylineLayerOptions(polylines: [
-                    Polyline(points: points, strokeWidth: 6, color: Colors.red)
-                  ])
+          body: SlidingUpPanel(
+            maxHeight: 200,
+            minHeight: 10,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+            controller: _pc1,
+            panel: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Center(
+                      child: Divider(
+                    color: Colors.black,
+                  )),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 55,
-                  left: 5,
+            ),
+            body: Stack(
+              children: <Widget>[
+                FlutterMap(
+                  options: MapOptions(
+                      center: LatLng(35.529779, 45.495944), zoom: 13),
+                  layers: [
+                    TileLayerOptions(
+                      urlTemplate:
+                          'https://api.mapbox.com/styles/v1/busschedule00/cl3ipmari008j14rswuhjiink/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnVzc2NoZWR1bGUwMCIsImEiOiJjbDNpcGQweTMwMGV5M2Rxcjd4NWdyZTZkIn0.IuRAkqjJXDs1tSQ09bEJZg',
+                    ),
+                    PolylineLayerOptions(polylines: [
+                      Polyline(
+                          points: points, strokeWidth: 6, color: Colors.red),
+                    ])
+                  ],
                 ),
-                child: IconButton(
-                  color: Colors.black,
-                  onPressed: _handleMenuButtonPressed,
-                  icon: ValueListenableBuilder<AdvancedDrawerValue>(
-                    valueListenable: _advancedDrawerController,
-                    builder: (_, value, __) {
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        child: Icon(
-                          value.visible ? Iconsax.close_square : Iconsax.menu,
-                          key: ValueKey<bool>(value.visible),
-                        ),
-                      );
-                    },
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 55,
+                    left: 5,
+                  ),
+                  child: IconButton(
+                    color: Colors.black,
+                    onPressed: _handleMenuButtonPressed,
+                    icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                      valueListenable: _advancedDrawerController,
+                      builder: (_, value, __) {
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 250),
+                          child: Icon(
+                            value.visible
+                                ? Iconsax.close_square
+                                : Iconsax.menu_14,
+                            size: 35,
+                            key: ValueKey<bool>(value.visible),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )),
     );
   }
